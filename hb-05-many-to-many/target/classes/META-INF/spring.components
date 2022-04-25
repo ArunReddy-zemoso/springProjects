@@ -1,0 +1,5 @@
+com.hibernate.demo.entity.Course=javax.persistence.Entity,javax.persistence.Table
+com.hibernate.demo.entity.Instructor=javax.persistence.Entity,javax.persistence.Table
+com.hibernate.demo.entity.InstructorDetail=javax.persistence.Entity,javax.persistence.Table
+com.hibernate.demo.entity.Review=javax.persistence.Entity,javax.persistence.Table
+com.hibernate.demo.entity.Student=javax.persistence.Entity,javax.persistence.Table

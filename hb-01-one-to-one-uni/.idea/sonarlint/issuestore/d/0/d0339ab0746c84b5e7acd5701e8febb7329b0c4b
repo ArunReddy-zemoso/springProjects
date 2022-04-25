@@ -1,0 +1,6 @@
+
+X	java:S125"<This block of commented-out lines of code should be removed.(—î–á8ƒİ×–€0
+S	java:S106/"9Replace this use of System.out or System.err by a logger.(›ê¯ëşÿÿÿÿ
+Z	java:S1065"9Replace this use of System.out or System.err by a logger.(ãÉ®îüÿÿÿÿ8Ú»³–€0
+`
+java:S1128	">Remove this unused import 'com.hibernate.demo.entity.Student'.(Ø úÿÿÿÿ8‹İ×–€0

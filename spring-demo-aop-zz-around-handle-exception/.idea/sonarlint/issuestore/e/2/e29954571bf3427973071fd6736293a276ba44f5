@@ -1,0 +1,16 @@
+
+X	java:S1258"<This block of commented-out lines of code should be removed.(ø¿ëó8ã—áÂƒ0
+]	java:S125E"<This block of commented-out lines of code should be removed.(«ë–üúÿÿÿÿ8£ãİÂƒ0
+R
+java:S1128"0Remove this unused import 'com.aopdemo.Account'.(‚ä¸ûÿÿÿÿ8¦ãİÂƒ0
+g
+java:S1128"ERemove this unused import 'org.aspectj.lang.reflect.MethodSignature'.(÷¨­öÿÿÿÿÿ8§ãİÂƒ0
+Y
+java:S1128
+"7Remove this unused import 'org.aspectj.lang.JoinPoint'.(¾Öùúÿÿÿÿ8§ãİÂƒ0
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8¨ãİÂƒ0
+M
+java:S2629-"7Use the built-in formatting to construct this argument.(ñ¦‰µ
+M
+java:S2629?"7Use the built-in formatting to construct this argument.(÷íæ

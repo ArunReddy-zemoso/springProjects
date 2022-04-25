@@ -1,0 +1,10 @@
+
+N	java:S106"9Replace this use of System.out or System.err by a logger.(ˆÃ
+N	java:S106"9Replace this use of System.out or System.err by a logger.(´„èâ
+N	java:S106("9Replace this use of System.out or System.err by a logger.(¢Ã¹›
+N	java:S106,"9Replace this use of System.out or System.err by a logger.(‚‰úº
+N	java:S1061"9Replace this use of System.out or System.err by a logger.(‹°Õ¦
+S	java:S1064"9Replace this use of System.out or System.err by a logger.(Áã‡Õøÿÿÿÿ
+U	java:S1065"9Replace this use of System.out or System.err by a logger.(½ƒÍô8ë¶À¢‚0
+W
+java:S1128"ARemove this unused import 'org.aspectj.lang.annotation.Pointcut'.(ˆ“¡¿
