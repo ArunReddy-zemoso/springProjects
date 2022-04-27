@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" >
+<head>
+    <title>book form</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+    <p class="h4 mb-4">Add Book</p>
+    <form action="#" th:action="@{/admin/savebook}"  method="post" th:object="${book}">
+        <input type="hidden"  th:field="*{id}" />
+        <input type="text" th:field="*{title}" class="form-control mb-4 col-4" placeholder="title">
+        <input type="text" th:field="*{description}" class="form-control mb-4 col-4" placeholder="description">
+        <input type="text" th:field="*{author}" class="form-control mb-4 col-4" placeholder="author">
+        <input type="text" th:field="*{category}" class="form-control mb-4 col-4" placeholder="category">
+        <button type="submit" class="btn btn-primary col-2">Save</button>
+    </form>
+    <hr>
+    <a th:href="@{/adminDashboard}">Back</a>
+</div>
+
+</body>
+</html>

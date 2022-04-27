@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Admin Page</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    </head>
+    <body>
+        <h3>Admin Page</h3>
+        <hr>
+        <a th:href="@{admin/addbook}" class="btn btn-primary btn-sm mb-3">Add Books</a>
+        <a th:href="@{admin/addstudent}" class="btn btn-primary btn-sm mb-3">Add Students</a>
+        <hr>
+        <a th:href="@{admin/booklist}" class="btn btn-primary btn-sm mb-3">Show Books</a>
+        <a th:href="@{admin/studentlist}" class="btn btn-primary btn-sm mb-3">Show Students</a>
+        <hr>
+        <a href="/login">logout</a>
+    </body>
+</html>
