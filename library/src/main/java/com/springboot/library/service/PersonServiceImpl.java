@@ -1,8 +1,6 @@
 package com.springboot.library.service;
 
-import com.springboot.library.entity.Book;
 import com.springboot.library.entity.Person;
-import com.springboot.library.repository.BookRepository;
 import com.springboot.library.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,8 +42,9 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void save(Person person) {
+    public Person save(Person person) {
         personRepository.save(person);
+        return person;
     }
 
     @Override

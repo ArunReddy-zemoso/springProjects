@@ -13,11 +13,11 @@ public class Book {
     private int id;
     @Column(name = "title")
     private String title;
-    @Column(name = "description")
+    @Column(name = "description",unique = true)
     private String description;
-    @Column(name = "author")
+    @Column(name = "author",nullable = false)
     private String author;
-    @Column(name = "category")
+    @Column(name = "category",nullable = false)
     private String category;
 
     @ManyToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
@@ -90,6 +90,10 @@ public class Book {
             persons = new ArrayList<>();
         }
         persons.add(person);
+    }
+
+    public void deletePerson(Person person) {
+        this.persons.remove(person);
     }
 
     @Override

@@ -23,6 +23,11 @@ public class BookServiceImpl implements BookService{
         return bookRepository.findAll();
     }
 
+//    @Override
+//    public List<Book> findByStudentId(int personId) {
+//        return bookRepository.findByStudentId(personId);
+//    }
+
     @Override
     public Book findById(int id) {
         Optional<Book> result = bookRepository.findById(id);

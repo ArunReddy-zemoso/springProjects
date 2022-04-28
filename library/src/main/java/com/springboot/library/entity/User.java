@@ -15,11 +15,11 @@ public class User {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "username")
+    @Column(name = "username",unique = true)
     private String username;
-    @Column(name = "password")
+    @Column(name = "password",nullable = false)
     private String password;
-    @Column(name = "roles")
+    @Column(name = "roles",nullable = false)
     private String roles;
 
     public User(){}
@@ -61,5 +61,15 @@ public class User {
 
     public void setRoles(String roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", roles='" + roles + '\'' +
+                '}';
     }
 }

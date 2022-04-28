@@ -1,6 +1,5 @@
 package com.springboot.library.service;
 
-import com.springboot.library.entity.Book;
 import com.springboot.library.entity.Person;
 
 import java.util.List;
@@ -11,7 +10,7 @@ public interface PersonService {
 
     public Person findByFirstName(String firstName);
 
-    public void save(Person person);
+    public Person save(Person person);
 
     public void deleteById(int id);
 }

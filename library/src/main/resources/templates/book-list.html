@@ -20,6 +20,7 @@
             <th>Author</th>
             <th>Category</th>
             <th>Description</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -29,6 +30,14 @@
             <td th:text="${tempBook.author}" />
             <td th:text="${tempBook.category}" />
             <td th:text="${tempBook.description}" />
+            <td>
+                <a th:href="@{/admin/showBookFormForUpdate(bookId=${tempBook.id})}" class="btn btn-info btn-sm">
+                    Update
+                </a>
+                <a th:href="@{/admin/deletebook(bookId=${tempBook.id})}" class="btn btn-danger btn-sm" onclick="if (!(confirm('Are you sure you want to delete this employee?'))) return false">
+                    Delete
+                </a>
+            </td>
         </tr>
         </tbody>
     </table>

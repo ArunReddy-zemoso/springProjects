@@ -38,6 +38,14 @@ public class Person {
         this.email = email;
     }
 
+    public Person(int id, String firstName, String lastName, String email, List<Book> books) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.books = books;
+    }
+
     public int getId() {
         return id;
     }
@@ -83,6 +91,13 @@ public class Person {
             books = new ArrayList<Book>();
         }
         books.add(book);
+    }
+
+    public void deleteBook(Book book) {
+        System.out.println(books.size());
+        this.books.remove(book);
+        System.out.println(this.books);
+        System.out.println(books.size());
     }
 
     @Override
