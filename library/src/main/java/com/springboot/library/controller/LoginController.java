@@ -43,8 +43,6 @@ public class LoginController {
     public String showStudentDashboard(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("user",authentication.getName());
-        System.out.println(authentication.getName());
-        System.out.println(personRepository.findByFirstName(authentication.getName()));
         Optional<Person> result = personRepository.findByFirstName(authentication.getName());
         Person person=null;
         if(result.isPresent()) { person=result.get(); }
@@ -54,8 +52,6 @@ public class LoginController {
             books.remove(book);
         }
         model.addAttribute("totalBooks",books);
-        System.out.println(books);
-        //model.addAttribute("books",bookRepository.findByStudentId(person.getId()));
         return "studentpage";
     }
 

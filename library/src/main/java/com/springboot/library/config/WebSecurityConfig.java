@@ -25,10 +25,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(new BCryptPasswordEncoder());
-        String password="arun";
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(password);
-        System.out.println("Encoded Password is : " + encodedPassword);
         return provider;
     }
 
@@ -40,7 +36,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/home").hasAnyRole("ADMIN","STUDENT")
-                .antMatchers("/books/showFormForAdd").hasAnyRole("ADMIN")
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/student/**").hasRole("STUDENT")
                 .anyRequest()
                 .authenticated()
                 .and()

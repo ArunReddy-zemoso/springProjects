@@ -2,6 +2,7 @@ package com.springboot.library.service;
 
 import com.springboot.library.entity.User;
 import com.springboot.library.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public class UserServiceImpl implements UserService{
 
     public UserServiceImpl(){}
 
+    @Autowired
     public UserServiceImpl(UserRepository userRepository){
         this.userRepository = userRepository;
     }
@@ -41,5 +43,10 @@ public class UserServiceImpl implements UserService{
     @Override
     public void deleteById(int id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteByUsername(String firstName) {
+        userRepository.deleteByUsername(firstName);
     }
 }

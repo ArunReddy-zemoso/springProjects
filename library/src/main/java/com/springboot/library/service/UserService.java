@@ -13,4 +13,5 @@ public interface UserService {
 
     public void deleteById(int id);
 
+    public void deleteByUsername(String firstName);
 }
