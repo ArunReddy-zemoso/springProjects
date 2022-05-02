@@ -37,6 +37,15 @@ public class Book {
         this.category = category;
     }
 
+    public Book(int id, String title, String description, String author, String category, List<Person> persons) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.author = author;
+        this.category = category;
+        this.persons = persons;
+    }
+
     public int getId() {
         return id;
     }

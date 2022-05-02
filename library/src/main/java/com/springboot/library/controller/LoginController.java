@@ -7,11 +7,9 @@ import com.springboot.library.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -40,12 +38,13 @@ public class LoginController {
     }
 
     @GetMapping("/studentDashboard")
-    public String showStudentDashboard(Model model){
+    public String showStudentDashboard(Model model) throws Exception {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("user",authentication.getName());
         Optional<Person> result = personRepository.findByFirstName(authentication.getName());
         Person person=null;
         if(result.isPresent()) { person=result.get(); }
+        if(person==null) { throw new Exception("Person is null");}
         model.addAttribute("student",person);
         List<Book> books= bookRepository.findAll();
         for(Book book : person.getBooks()) {

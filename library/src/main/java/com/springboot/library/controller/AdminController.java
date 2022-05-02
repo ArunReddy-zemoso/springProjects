@@ -7,7 +7,6 @@ import com.springboot.library.service.BookService;
 import com.springboot.library.service.PersonService;
 import com.springboot.library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -126,7 +125,6 @@ public class AdminController {
         personService.deleteById(id);
         Person person=personService.findById(id);
         userService.deleteByUsername(person.getFirstName());
-        //userService.deleteById(id);
         return "redirect:/admin/studentlist";
     }
 

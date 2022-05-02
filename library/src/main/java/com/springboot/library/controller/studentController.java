@@ -28,7 +28,7 @@ public class studentController {
     }
 
     @GetMapping("/deletebook")
-    public String deleteBook(@RequestParam("bookId") int bid,@RequestParam("studentId") int sid){
+    public String deleteBook(@RequestParam("bookId") int bid,@RequestParam("studentId") int sid) throws Exception {
         Optional<Person> personResult=personRepository.findById(sid);
 
         Optional<Book> bookResult=bookRepository.findById(bid);
@@ -39,9 +39,7 @@ public class studentController {
         Book book=null;
         if(bookResult.isPresent()) { book=bookResult.get(); }
 
-//        System.out.println(person.toString());
-//        System.out.println(book.toString());
-
+        if(person==null){throw new Exception("Person is Null");}
         person.deleteBook(book);
 
         personRepository.save(person);
@@ -50,7 +48,7 @@ public class studentController {
     }
 
     @GetMapping("/addbooktostudent")
-    public String addbooktostudent(@RequestParam("bookId") int bid,@RequestParam("studentId") int sid){
+    public String addbooktostudent(@RequestParam("bookId") int bid,@RequestParam("studentId") int sid) throws Exception {
         Optional<Person> personResult=personRepository.findById(sid);
 
         Optional<Book> bookResult=bookRepository.findById(bid);
@@ -61,9 +59,9 @@ public class studentController {
         Book book=null;
         if(bookResult.isPresent()) { book=bookResult.get(); }
 
-        System.out.println(person.toString());
-        System.out.println(book.toString());
 
+        if(person==null){throw new Exception("Person is Null");}
+        if(book==null){throw new Exception("Book is Null");}
         person.addBook(book);
 
         personRepository.save(person);
