@@ -1,6 +1,11 @@
 package com.springboot.library.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +17,16 @@ public class Book {
     @Column(name = "id")
     private int id;
     @Column(name = "title")
+    @NotEmpty(message = "Title can't be empty")
     private String title;
-    @Column(name = "description",unique = true)
+    @Column(name = "description")
+    @NotEmpty(message = "description can't be empty")
     private String description;
     @Column(name = "author",nullable = false)
+    @NotEmpty(message = "author can't be empty")
     private String author;
     @Column(name = "category",nullable = false)
+    @NotEmpty(message = "category can't be empty")
     private String category;
 
     @ManyToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
@@ -28,7 +37,6 @@ public class Book {
     )
     private List<Person> persons;
 
-    public Book(){}
 
     public Book(String title, String description, String author, String category) {
         this.title = title;
@@ -36,6 +44,8 @@ public class Book {
         this.author = author;
         this.category = category;
     }
+
+    public Book(){}
 
     public Book(int id, String title, String description, String author, String category, List<Person> persons) {
         this.id = id;

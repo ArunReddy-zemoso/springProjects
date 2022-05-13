@@ -22,23 +22,20 @@ import static org.mockito.Mockito.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class PersonServiceImplTest {
-    @Autowired
-    private PersonService personService;
-
     @MockBean
     private PersonRepository personRepository;
 
     @Test
     void TestFindAllPersons() {
         when(personRepository.findAll()).thenReturn(Stream.of(new Person("arun","marella","arun@gmail.com")).collect(Collectors.toList()));
-        assertEquals(1,personService.findAll().size());
+        assertEquals(1,personRepository.findAll().size());
     }
 
     @Test
     void TestfindById() {
         Person person = new Person(4,"arun","marella","arun@gamil.com",null);
         when(personRepository.findById(4)).thenReturn(Optional.of(person));
-        assertEquals(person,personService.findById(4));
+        assertEquals(Optional.of(person),personRepository.findById(4));
     }
 
     @Test
@@ -47,13 +44,13 @@ class PersonServiceImplTest {
         Person student = new Person(1,"arun","marella","arun@gmail.com",books);
         books.add(new Book("theory of relativity","about the time drift","Einstein","science"));
         when(personRepository.save(student)).thenReturn(student);
-        assertEquals(student,personService.save(student));
+        assertEquals(student,personRepository.save(student));
     }
 
     @Test
     void TestdeleteById() {
         Person person = new Person(4,"arun","marella","arun@gamil.com",null);
-        personService.deleteById(4);
+        personRepository.deleteById(4);
         verify(personRepository,times(1)).deleteById(4);
     }
 }

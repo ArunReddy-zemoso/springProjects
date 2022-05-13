@@ -1,24 +1,35 @@
 package com.springboot.library.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "person")
 public class Person {
+    private static final String EMAIL_REGEX = "^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
     @Column(name = "first_name")
+    @NotEmpty(message = "FirstName can't be empty")
     private String firstName;
 
     @Column(name = "last_name")
+    @NotEmpty(message = "LastName can't be empty")
     private String lastName;
 
     @Column(name = "email")
+    @NotEmpty(message = "Email can't be empty")
+    @Pattern(regexp = EMAIL_REGEX, message = "Invalid format.")
     private String email;
 
 
@@ -31,7 +42,6 @@ public class Person {
     private List<Book> books;
 
     public Person(){}
-
     public Person(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -88,16 +98,13 @@ public class Person {
 
     public void addBook(Book book) {
         if(books == null){
-            books = new ArrayList<Book>();
+            books = new ArrayList<>();
         }
         books.add(book);
     }
 
     public void deleteBook(Book book) {
-        System.out.println(books.size());
         this.books.remove(book);
-        System.out.println(this.books);
-        System.out.println(books.size());
     }
 
     @Override

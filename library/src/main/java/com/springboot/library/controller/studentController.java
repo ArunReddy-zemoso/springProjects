@@ -28,27 +28,21 @@ public class studentController {
     }
 
     @GetMapping("/deletebook")
-    public String deleteBook(@RequestParam("bookId") int bid,@RequestParam("studentId") int sid) throws Exception {
-        Optional<Person> personResult=personRepository.findById(sid);
+    public String deleteBook(@RequestParam("bookId") int bid,@RequestParam("studentId") int sid) throws NullPointerException {
 
-        Optional<Book> bookResult=bookRepository.findById(bid);
-
-        Person person=null;
-        if(personResult.isPresent()) { person=personResult.get(); }
-
-        Book book=null;
-        if(bookResult.isPresent()) { book=bookResult.get(); }
-
-        if(person==null){throw new Exception("Person is Null");}
-        person.deleteBook(book);
-
-        personRepository.save(person);
+        addDeleteBookToStudent(bid,sid,"delete");
 
         return "redirect:/studentDashboard";
     }
 
     @GetMapping("/addbooktostudent")
-    public String addbooktostudent(@RequestParam("bookId") int bid,@RequestParam("studentId") int sid) throws Exception {
+    public String addbooktostudent(@RequestParam("bookId") int bid,@RequestParam("studentId") int sid) throws NullPointerException {
+        addDeleteBookToStudent(bid,sid,"add");
+
+        return "redirect:/studentDashboard";
+    }
+
+    public void addDeleteBookToStudent(int bid,int sid,String operation){
         Optional<Person> personResult=personRepository.findById(sid);
 
         Optional<Book> bookResult=bookRepository.findById(bid);
@@ -59,14 +53,15 @@ public class studentController {
         Book book=null;
         if(bookResult.isPresent()) { book=bookResult.get(); }
 
+        if(person==null){throw new NullPointerException("Person is Null");}
+        if(book==null){throw new NullPointerException("Book is Null");}
 
-        if(person==null){throw new Exception("Person is Null");}
-        if(book==null){throw new Exception("Book is Null");}
-        person.addBook(book);
+        if(operation.equals("add"))
+            person.addBook(book);
+        else if(operation.equals("delete"))
+            person.deleteBook(book);
 
         personRepository.save(person);
-
-        return "redirect:/studentDashboard";
     }
 
 }

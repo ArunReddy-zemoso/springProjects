@@ -7,23 +7,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+    <style>
+        .flexDiv {
+            display: inherit;
+        }
+
+        .submitBtn {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
-    <h3>student Directory</h3>
-    <hr>
-    <p class="h4 mb-4">save your student</p>
-    <form action="#" th:action="@{/admin/savestudent}"  method="post" th:object="${student}">
-        <input type="hidden"  th:field="*{id}" />
-        <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4" placeholder="First name">
-        <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4" placeholder="Last name">
-        <input type="text" th:field="*{email}" class="form-control mb-4 col-4" placeholder="Email">
-        <button type="submit" class="btn btn-primary col-2">Save</button>
+    <p class="h4 mb-4">Add Book</p>
+<!--    <hr>-->
+<!--    <p class="h4 mb-4">save your student</p>-->
+<!--    <form action="#" th:action="@{/admin/savestudent}"  method="post" th:object="${student}">-->
+<!--        <input type="hidden"  th:field="*{id}" />-->
+<!--        <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4" placeholder="First name">-->
+<!--        <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4" placeholder="Last name">-->
+<!--        <input type="text" th:field="*{email}" class="form-control mb-4 col-4" placeholder="Email">-->
+<!--        <button type="submit" class="btn btn-primary col-2">Save</button>-->
+<!--    </form>-->
+<!--    <hr>-->
+    <form action="#" th:action="@{/admin/savestudent}" th:object="${student}" th:method="POST">
+        <input type="hidden" th:field="*{id}" />
+        <div class="form-group">
+            <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4" placeholder="First name">
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" />
+        </div>
+        <div class="form-group">
+            <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4" placeholder="Last name">
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" />
+        </div>
+        <div class="form-group">
+            <input type="text" th:field="*{email}" class="form-control mb-4 col-4" placeholder="Email">
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" />
+        </div>
+        <button type="submit" class="btn btn-info col-2 submitBtn">Save</button>
     </form>
     <hr>
-    <a th:href="@{/adminDashboard}">Back to admin Page</a>
+    <a th:href="@{/adminDashboard}">Back</a>
 </div>
 
 </body>

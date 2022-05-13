@@ -23,23 +23,19 @@ public class BookServiceImpl implements BookService{
         return bookRepository.findAll();
     }
 
-//    @Override
-//    public List<Book> findByStudentId(int personId) {
-//        return bookRepository.findByStudentId(personId);
-//    }
-
     @Override
     public Book findById(int id) {
         Optional<Book> result = bookRepository.findById(id);
         Book book=null;
         if(result.isPresent()) { book=result.get(); }
-        else{ throw new RuntimeException("Did not find book id - "+id); }
+        else{ throw new NullPointerException("Did not find book id - "+id); }
         return book;
     }
 
     @Override
-    public void save(Book book) {
+    public Book save(Book book) {
         bookRepository.save(book);
+        return book;
     }
 
     @Override

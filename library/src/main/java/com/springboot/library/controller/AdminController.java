@@ -10,9 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -24,6 +27,7 @@ public class AdminController {
     private BookService bookService;
     @Autowired
     private UserService userService;
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public AdminController(){}
     @Autowired
@@ -51,7 +55,8 @@ public class AdminController {
     @GetMapping("/userlist")
     public String getUserList(Model model){
         List<User> users=userService.findAll();
-        model.addAttribute("users",users);
+        List<User> admins=users.stream().filter(user -> user.getRoles().equals("ROLE_ADMIN")).collect(Collectors.toList())  ;
+        model.addAttribute("users",admins);
         return "user-list";
     }
 
@@ -100,21 +105,31 @@ public class AdminController {
 
 
     @PostMapping("/savestudent")
-    public String saveStudent(@ModelAttribute("student") Person person) {
+    public String saveStudent(@Valid @ModelAttribute("student") Person person, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "addstudent";
+        }
+        User user=new User(person.getFirstName(),passwordEncoder.encode(person.getFirstName()),"ROLE_STUDENT");
         personService.save(person);
+        userService.save(user);
         return "redirect:/admin/studentlist";
     }
 
 
     @PostMapping("/savebook")
-    public String saveBook(@ModelAttribute("book") Book book) {
+    public String saveBook(@Valid @ModelAttribute("book") Book book, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "addbook";
+        }
         bookService.save(book);
         return "redirect:/admin/booklist";
     }
 
     @PostMapping("/saveuser")
-    public String saveuser(@ModelAttribute("user") User user) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    public String saveuser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "adduser";
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.save(user);
         return "redirect:/admin/userlist";

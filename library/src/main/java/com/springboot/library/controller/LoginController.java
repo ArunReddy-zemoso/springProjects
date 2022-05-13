@@ -38,13 +38,13 @@ public class LoginController {
     }
 
     @GetMapping("/studentDashboard")
-    public String showStudentDashboard(Model model) throws Exception {
+    public String showStudentDashboard(Model model) throws NullPointerException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("user",authentication.getName());
         Optional<Person> result = personRepository.findByFirstName(authentication.getName());
         Person person=null;
         if(result.isPresent()) { person=result.get(); }
-        if(person==null) { throw new Exception("Person is null");}
+        if(person==null) { throw new NullPointerException("Person is null");}
         model.addAttribute("student",person);
         List<Book> books= bookRepository.findAll();
         for(Book book : person.getBooks()) {

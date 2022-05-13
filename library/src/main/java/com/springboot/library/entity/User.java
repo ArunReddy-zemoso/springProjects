@@ -1,29 +1,42 @@
 package com.springboot.library.entity;
 
+
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
     @Column(name = "username",unique = true)
+    @NotEmpty(message = "username can't be empty")
     private String username;
+
     @Column(name = "password",nullable = false)
+    @NotEmpty(message = "password can't be empty")
     private String password;
+
     @Column(name = "roles",nullable = false)
+    @NotEmpty(message = "role can't be empty")
     private String roles;
 
     public User(){}
 
+    public User(String username, String password, String roles) {
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+    }
     public User(int id, String username, String password, String roles) {
         this.id = id;
         this.username = username;

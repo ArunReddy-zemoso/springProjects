@@ -28,7 +28,7 @@ public class PersonServiceImpl implements PersonService {
         Optional<Person> result = personRepository.findById(id);
         Person person=null;
         if(result.isPresent()) { person=result.get(); }
-        else{ throw new RuntimeException("Did not find book of id - "+id); }
+        else{ throw new NullPointerException("Did not find person of id - "+id); }
         return person;
     }
 
@@ -37,7 +37,7 @@ public class PersonServiceImpl implements PersonService {
         Optional<Person> result = personRepository.findByFirstName(firstName);
         Person person=null;
         if(result.isPresent()) { person=result.get(); }
-        else{ throw new RuntimeException("Did not find person of name - "+firstName);}
+        else{ throw new NullPointerException("Did not find person of name - "+firstName);}
         return person;
     }
 
