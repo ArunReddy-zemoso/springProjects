@@ -7,18 +7,21 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
+    private static final String EMAIL_REGEX = "^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$";
+//    private static final String ROLES_REGEX = "/^(ROLE_ADMIN|ROLE_STUDENT)$/";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "username",unique = true)
+    @Column(name = "username")
     @NotEmpty(message = "username can't be empty")
     private String username;
 
@@ -27,20 +30,28 @@ public class User implements Serializable {
     private String password;
 
     @Column(name = "roles",nullable = false)
-    @NotEmpty(message = "role can't be empty")
+//    @NotEmpty(message = "role can't be empty")
+//    @Pattern(regexp = ROLES_REGEX, message = "Invalid role.")
     private String roles;
+
+    @Column(name = "email")
+    @NotEmpty(message = "Email can't be empty")
+    @Pattern(regexp = EMAIL_REGEX, message = "Invalid format.")
+    private String email;
 
     public User(){}
 
-    public User(String username, String password, String roles) {
+    public User(String username, String password, String email, String roles) {
         this.username = username;
         this.password = password;
+        this.email = email;
         this.roles = roles;
     }
-    public User(int id, String username, String password, String roles) {
+    public User(int id, String username, String password, String email, String roles) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.email = email;
         this.roles = roles;
     }
 
@@ -68,6 +79,14 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getRoles() {
         return roles;
     }
@@ -83,6 +102,7 @@ public class User implements Serializable {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", roles='" + roles + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

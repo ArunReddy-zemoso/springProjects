@@ -41,8 +41,8 @@
             <p class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}" />
         </div>
         <div class="form-group">
-            <input type="text" th:field="*{roles}" class="form-control mb-4 col-4" placeholder="Role" />
-            <p class="alert alert-danger" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" />
+            <input type="text" th:field="*{email}" class="form-control mb-4 col-4" placeholder="email" />
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('roles')}" th:errors="*{email}" />
         </div>
         <div class="form-group">
             <input type="text" th:field="*{password}" class="form-control mb-4 col-4" placeholder="Password" />

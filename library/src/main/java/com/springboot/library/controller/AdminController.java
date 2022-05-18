@@ -109,9 +109,22 @@ public class AdminController {
         if(bindingResult.hasErrors()){
             return "addstudent";
         }
-        User user=new User(person.getFirstName(),passwordEncoder.encode(person.getFirstName()),"ROLE_STUDENT");
+        //User user=new User(person.getFirstName(),passwordEncoder.encode(person.getFirstName()),person.getEmail(),"ROLE_STUDENT");
         personService.save(person);
-        userService.save(user);
+        System.out.println(person.getFirstName());
+        System.out.println(userService.findByUsername(person.getFirstName()));
+        User user = userService.findByUsername(person.getFirstName());
+        User tempuser = null;
+        if(user == null){
+            tempuser=new User(person.getFirstName(),passwordEncoder.encode(person.getFirstName()),person.getEmail(),"ROLE_STUDENT");
+            userService.save(tempuser);
+        }
+        else{
+            user.setEmail(person.getEmail());
+            user.setUsername(person.getFirstName());
+            userService.save(user);
+        }
+        //userService.save(user);
         return "redirect:/admin/studentlist";
     }
 
@@ -131,6 +144,7 @@ public class AdminController {
             return "adduser";
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles("ROLE_ADMIN");
         userService.save(user);
         return "redirect:/admin/userlist";
     }
